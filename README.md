@@ -31,6 +31,17 @@
 - [x] 添加了对[Mountify](https://github.com/backslashxx/mountify)模块的支持
 - [x] 加入Re:Kernel支持，与Freezer，NoActive等软件配合降低功耗
 - [x] 加入内核防格基带保护(By [@showdo](https://github.com/showdo))，有效防止恶意格机脚本/程序对系统分区数据的破坏
+- [x] 支持在GitHub Actions构建完成后自动推送到Telegram群组/频道
+
+### Telegram通知配置
+要启用Telegram通知功能，需要在仓库的Settings -> Secrets and variables -> Actions中添加以下Secrets：
+- `BOT_TOKEN`: Telegram Bot Token（通过 [@BotFather](https://t.me/BotFather) 创建bot获取）
+- `CHATID`: 目标群组/频道的Chat ID
+- `MESSAGE_THREAD_ID`: (可选) 消息主题ID，用于超级群组的主题功能
+- `API_ID`: Telegram API ID（在 [my.telegram.org](https://my.telegram.org) 获取）
+- `API_HASH`: Telegram API Hash（在 [my.telegram.org](https://my.telegram.org) 获取）
+
+配置完成后，每次构建发布时会自动将内核包推送到指定的Telegram群组/频道。
 ## 待实现：
 - [ ] 欧加真 SM8750 通用GKI内核（移植一加f2fs源码，实现免清data刷入）
 - [ ] zram内置化，无需外置zram.ko挂载 ~~（有了新版 lz4&zstd 补丁真的还有必要吗）~~
