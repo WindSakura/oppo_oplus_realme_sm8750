@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       ksu_type:
-        description: 'KernelSU分支(SukiSU Ultra/KernelSU Next,默认SukiSU Ultra)'
+        description: 'KernelSU分支(SukiSU Ultra/MKSU,默认SukiSU Ultra)'
         required: true
         type: choice
         default: 'sukisu'
@@ -689,7 +689,7 @@ jobs:
           if [[ ${{ github.event.inputs.ksu_type }} == "sukisu" ]]; then
             KSU_BRANCH="SukiSU Ultra"
           else
-            KSU_BRANCH="KernelSU Next"
+            KSU_BRANCH="MKSU"
           fi
           echo "KSU_BRANCH=$KSU_BRANCH" >> $GITHUB_ENV
           if [[ "${{ github.event.inputs.lz4_enable }}" == "2" || "${{ github.event.inputs.lz4_enable }}" == "3" ]]; then
@@ -740,7 +740,7 @@ jobs:
             - 内核级基带保护支持：${{ github.event.inputs.baseband_guard }}
             - 推荐系统：ColorOS 15 / RealmeUI 6.0
             - SukiSU Ultra管理器下载：[SukiSU-Ultra](https://github.com/SukiSU-Ultra/SukiSU-Ultra/releases)
-            - KernelSU Next管理器下载：[KernelSU-Next](https://github.com/KernelSU-Next/KernelSU-Next/releases)
+            - KernelSU Next管理器下载：[5ec1cff/KernelSU](https://t.me/mksu_ci)
             ### ⏫️ 更新内容：
             - 更新${{ env.KSU_BRANCH }}至最新版本（${{ needs.build.outputs.ksuver }}）
             - (预留)
