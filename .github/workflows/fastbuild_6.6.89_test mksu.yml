@@ -292,7 +292,7 @@ jobs:
             # patch -p1 < 10_enable_susfs_for_ksu.patch || true
             # 应用MKSU补丁
             cd ./common
-            # 暂时性移除SUSFS补丁应用，以避免与MKSU冲突
+            # SUSFS和MKSU patch
             patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
             patch -p1 -N -F 3 < fix_core_hook.c.patch || true
             patch -p1 -N -F 3 < 69_hide_stuff.patch || true
@@ -360,9 +360,9 @@ jobs:
           echo "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KSU_SUSFS_OPEN_REDIRECT=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_KSU_SUSFS_SUS_MAP=y" >> ./common/arch/arm64/configs/gki_defconfig
-          #添加对 Mountify (backslashxx/mountify) 模块的支持
-          echo "CONFIG_TMPFS_XATTR=y" >> ./common/arch/arm64/configs/gki_defconfig
-          echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./common/arch/arm64/configs/gki_defconfig
+          # 添加对 Mountify (backslashxx/mountify) 模块的支持(暂时弃用)
+          # echo "CONFIG_TMPFS_XATTR=y" >> ./common/arch/arm64/configs/gki_defconfig
+          # echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./common/arch/arm64/configs/gki_defconfig
           if [[ "${{ github.event.inputs.lz4_enable }}" == "2" || "${{ github.event.inputs.lz4_enable }}" == "3" ]]; then
             echo "CONFIG_ZSMALLOC=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_CRYPTO_LZ4HC=y" >> ./common/arch/arm64/configs/gki_defconfig
