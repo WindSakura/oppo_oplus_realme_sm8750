@@ -285,7 +285,7 @@ jobs:
             # cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch ./common/
             # cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
             # cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
-            cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
+            # cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
             # cp ./kernel_patches/69_hide_stuff.patch ./common/
             # 应用SUSFS补丁
             # cd ./KernelSU
@@ -294,7 +294,7 @@ jobs:
             cd ./common
             # 暂时性移除SUSFS补丁应用，以避免与MKSU冲突
             # patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
-            patch -p1 -N -F 3 < fix_core_hook.c.patch || true
+            # patch -p1 -N -F 3 < fix_core_hook.c.patch || true
             #patch -p1 -N -F 3 < 69_hide_stuff.patch || true
           fi
           
