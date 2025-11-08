@@ -277,25 +277,25 @@ jobs:
             fi
             patch -p1 < 69_hide_stuff.patch || true
           else
-            echo "正在添加MKSU补丁..."
-            git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}
-            git clone https://github.com/WildKernels/kernel_patches.git
+            # echo "正在添加MKSU补丁..."
+            # git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}
+            # git clone https://github.com/WildKernels/kernel_patches.git
             # 暂时性移除SUSFS补丁应用，以避免与MKSU冲突
             # cp ./susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/
-            cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch ./common/
-            cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
-            cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
-            cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
-            cp ./kernel_patches/69_hide_stuff.patch ./common/
+            # cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch ./common/
+            # cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
+            # cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
+            # cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
+            # cp ./kernel_patches/69_hide_stuff.patch ./common/
             # 应用SUSFS补丁
             # cd ./KernelSU
             # patch -p1 < 10_enable_susfs_for_ksu.patch || true
             # 应用MKSU补丁
-            cd ./common
+            # cd ./common
             # SUSFS和MKSU patch
-            patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
-            patch -p1 -N -F 3 < fix_core_hook.c.patch || true
-            patch -p1 -N -F 3 < 69_hide_stuff.patch || true
+            # patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
+            # patch -p1 -N -F 3 < fix_core_hook.c.patch || true
+            # patch -p1 -N -F 3 < 69_hide_stuff.patch || true
           fi
           
       - name: 应用lz4 1.10.0 & zstd 1.5.7补丁
