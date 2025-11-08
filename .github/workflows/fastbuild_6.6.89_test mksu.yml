@@ -280,7 +280,6 @@ jobs:
             echo "正在添加MKSU补丁..."
             git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}
             git clone https://github.com/WildKernels/kernel_patches.git
-            git clone https://github.com/ShirkNeko/SukiSU_patch.git
             # 暂时性移除SUSFS补丁应用，以避免与MKSU冲突
             # cp ./susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/
             cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch ./common/
@@ -288,7 +287,6 @@ jobs:
             cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
             cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
             cp ./kernel_patches/69_hide_stuff.patch ./common/
-            cp ./SukiSU_patch/hooks/syscall_hooks.patch ./common/
             # 应用SUSFS补丁
             # cd ./KernelSU
             # patch -p1 < 10_enable_susfs_for_ksu.patch || true
@@ -297,7 +295,6 @@ jobs:
             # SUSFS和MKSU patch
             patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
             patch -p1 -N -F 3 < fix_core_hook.c.patch || true
-            patch -p1 < syscall_hooks.patch || true
             patch -p1 -N -F 3 < 69_hide_stuff.patch || true
           fi
           
@@ -345,7 +342,7 @@ jobs:
             echo "CONFIG_KSU_KPROBES_HOOK=y" >> ./common/arch/arm64/configs/gki_defconfig
           else
             echo "正在开启manual/syscall钩子..."
-            echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./common/arch/arm64/configs/gki_defconfig
+            # echo "CONFIG_KSU_MANUAL_HOOK=y" >> ./common/arch/arm64/configs/gki_defconfig
             echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./common/arch/arm64/configs/gki_defconfig
           fi
           echo "CONFIG_KSU_SUSFS=y" >> ./common/arch/arm64/configs/gki_defconfig
