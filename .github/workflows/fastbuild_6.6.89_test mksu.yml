@@ -287,6 +287,7 @@ jobs:
             cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
             cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
             cp ./kernel_patches/69_hide_stuff.patch ./common/
+            cp ./SukiSU_patch/hooks/syscall_hooks.patch ./common/
             # 应用SUSFS补丁
             # cd ./KernelSU
             # patch -p1 < 10_enable_susfs_for_ksu.patch || true
@@ -295,6 +296,7 @@ jobs:
             # SUSFS和MKSU patch
             patch -p1 < 50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch || true
             patch -p1 -N -F 3 < fix_core_hook.c.patch || true
+            patch -p1 < syscall_hooks.patch || true
             patch -p1 -N -F 3 < 69_hide_stuff.patch || true
           fi
           
