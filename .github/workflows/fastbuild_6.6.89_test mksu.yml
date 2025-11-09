@@ -288,9 +288,9 @@ jobs:
             fi
             # cp ./susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU/
             cp ./susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ env.ANDROID_VERSION }}-${{ env.KERNEL_VERSION }}.patch ./common/
-            # cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
-            # cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
-            # cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
+            cp ./susfs4ksu/kernel_patches/fs/* ./common/fs/
+            cp ./susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
+            cp ./kernel_patches/mksu/fix_core_hook.c.patch ./common/
             cp ./SukiSU_patch/69_hide_stuff.patch ./common/
             # 应用SUSFS补丁
             # cd ./KernelSU
