@@ -874,3 +874,39 @@ jobs:
           prerelease: false
           files: |
             release_zips/AnyKernel3_*.zip
+
+      - name: 获取bot脚本
+        uses: actions/checkout@v4
+        with:
+          path: bot
+
+      - name: 上传至Telegram
+        run: |
+          if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
+            echo "📤 正在上传到Telegram..."
+            pip3 install telethon
+            python3 ./bot/script/buildbot.py ./release_zips/AnyKernel3_*.zip
+            echo "✅ 文件已上传到Telegram"
+          else
+            echo "⚠️  BOT_TOKEN未设置，跳过Telegram上传"
+          fi
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHATID: ${{ secrets.CHATID }}
+          MESSAGE_THREAD_ID: ${{ secrets.MESSAGE_THREAD_ID }}
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          KERNEL_VERSION: ${{ env.KERNEL_VERSION }}
+          FULL_VERSION: ${{ env.FULL_VERSION }}
+          KSU_BRANCH: ${{ env.KSU_BRANCH }}
+          KSUVER: ${{ needs.build.outputs.ksuver }}
+          HOOK_METHOD: ${{ github.event.inputs.hook_method }}
+          KPM_ENABLE: ${{ github.event.inputs.kpm_enable }}
+          LZ4KD_ENABLE: ${{ env.lz4kd_enable }}
+          LZ4_ZSTD_ENABLE: ${{ env.lz4_zstd_enable }}
+          BBR_ENABLE: ${{ github.event.inputs.bbr_enable }}
+          BETTER_NET: ${{ github.event.inputs.better_net }}
+          ADIOS_ENABLE: ${{ env.adios_enable }}
+          REKERNEL_ENABLE: ${{ env.rekernel_enable }}
+          BASEBAND_GUARD: ${{ github.event.inputs.baseband_guard }}
+          TIME_FORM: ${{ env.TIME_FORM }}
