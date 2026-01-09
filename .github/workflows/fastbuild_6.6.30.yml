@@ -914,15 +914,13 @@ jobs:
           API_HASH: ${{ secrets.API_HASH }}
           KERNEL_VERSION: ${{ env.KERNEL_VERSION }}
           FULL_VERSION: ${{ env.FULL_VERSION }}
-          KSU_BRANCH: ${{ env.KSU_BRANCH }}
-          KSUVER: ${{ needs.build.outputs.ksuver }}
-          HOOK_METHOD: ${{ github.event.inputs.hook_method }}
+          KSU_BRANCH: ${{ env.KSU_TYPENAME }}
           KPM_ENABLE: ${{ github.event.inputs.kpm_enable }}
-          LZ4KD_ENABLE: ${{ env.lz4kd_enable }}
-          LZ4_ZSTD_ENABLE: ${{ env.lz4_zstd_enable }}
+          LZ4KD_ENABLE: ${{ github.event.inputs.lz4kd_enable }}
+          LZ4_ZSTD_ENABLE: ${{ github.event.inputs.lz4_enable }}
           BBR_ENABLE: ${{ github.event.inputs.bbr_enable }}
           BETTER_NET: ${{ github.event.inputs.better_net }}
-          ADIOS_ENABLE: ${{ env.adios_enable }}
-          REKERNEL_ENABLE: ${{ env.rekernel_enable }}
+          ADIOS_ENABLE: ${{ github.event.inputs.adios_enable }}
+          REKERNEL_ENABLE: ${{ github.event.inputs.rekernel_enable }}
           BASEBAND_GUARD: ${{ github.event.inputs.baseband_guard }}
           TIME_FORM: ${{ env.TIME_FORM }}
